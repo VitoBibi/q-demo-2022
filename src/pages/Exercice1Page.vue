@@ -36,19 +36,21 @@
     <div className="form q-mb-lg">
       <div className="row q-mb-md">
         <label>Nom:</label>
-        <input type="text" v-model="name">
+        <input type="text" v-model="name"
+               :class="{'error': !nameValid()}">
         <label className="error" v-show="!nameValid()">
           Maximum 15 caractères
         </label>
       </div>
       <div className="row q-mb-md">
         <label>Age:</label>
-        <input type="number" v-model="age">
+        <input type="number" v-model="age"
+               :class="{'error': !ageValid()}">
         <label className="error" v-show="!ageValid()">
           Veuillez entrer un âge compris entre 1 et 100</label>
       </div>
       <div className="row">
-        <button>Générer une personne</button>
+        <button @click="randomName">Générer une personne</button>
       </div>
     </div>
     <div v-if="nameValid() && ageValid()" className="description q-mb-lg">
@@ -65,7 +67,25 @@
 
 <script>
 import { defineComponent } from 'vue'
-
+const noms = [
+  'Xavier',
+  'Alexandre',
+  'Ryan',
+  'Kushtrim',
+  'Thomas',
+  'kilian',
+  'Vito',
+  'Drene',
+  'Melissa',
+  'James',
+  'Bernard',
+  'Steve',
+  'Laurent',
+  'Lino',
+  'Gabriel',
+  'Yannick',
+  'Céline'
+]
 export default defineComponent({
   name: 'Exercie1Page',
   data () {
@@ -88,7 +108,15 @@ export default defineComponent({
     },
     ageValid () {
       return this.age > 0 && this.age <= 100
+    },
+    randomName () {
+      this.name = noms[Math.floor(Math.random() * noms.length)]
+      this.age = Math.ceil(Math.random() * 100) // prend un âge au hasard pas en dessus de 100
+      // this.age = parseInt(Math.random() * 100 + 1
     }
+  },
+  mounted () {
+    this.randomName()
   }
 })
 
