@@ -36,24 +36,26 @@
     <div className="form q-mb-lg">
       <div className="row q-mb-md">
         <label>Nom:</label>
-        <input type="text">
-        <label className="error">Maximum 15 caractères
+        <input type="text" v-model="name">
+        <label className="error" v-show="!nameValid()">
+          Maximum 15 caractères
         </label>
       </div>
       <div className="row q-mb-md">
         <label>Age:</label>
-        <input type="number">
-        <label className="error">Veuillez entrer un âge compris entre 1 et 100</label>
+        <input type="number" v-model="age">
+        <label className="error" v-show="!ageValid()">
+          Veuillez entrer un âge compris entre 1 et 100</label>
       </div>
       <div className="row">
         <button>Générer une personne</button>
       </div>
     </div>
-    <div className="description q-mb-lg">
-      <p>Mon nom est <b>Danny</b> et j'ai <b>36</b> ans.</p>
-      <p>Dans 10 ans, j'aurai <b>46</b> ans.</p>
-      <p>Mon nom se compose de <b>5</b> caractères.</p>
-      <p>Mon nom en majuscules est <b>DANNY</b>.</p>
+    <div v-if="nameValid() && ageValid()" className="description q-mb-lg">
+      <p>Mon nom est <b>{{ name }}</b> et j'ai <b>{{ age }}</b> ans.</p>
+      <p>Dans 10 ans, j'aurai <b>{{ futurAge }}</b> ans.</p>
+      <p>Mon nom se compose de <b>{{ name.length }}</b> caractères.</p>
+      <p>Mon nom en majuscules est <b>{{ name.toUpperCase() }}</b>.</p>
     </div>
     <div className="no-details">
       <p>Veuillez entrer un nom et un âge valide !</p>
@@ -65,8 +67,31 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Exercie1Page'
+  name: 'Exercie1Page',
+  data () {
+    return {
+      name: 'Vito',
+      age: '21'
+    }
+  },
+  computed: {
+    futurAge () {
+      return parseInt(this.age) + 10
+    }
+  },
+  methods: {
+    nameValid () {
+      if (this.name.length > 0 && this.name.length <= 15) {
+        return true
+      }
+      return false
+    },
+    ageValid () {
+      return this.age > 0 && this.age <= 100
+    }
+  }
 })
+
 </script>
 
 <style>

@@ -25,6 +25,11 @@
       bordered
     >
       <q-list>
+        <q-item-label
+          header
+        >
+          Mes exercices
+        </q-item-label>
         <q-item v-for="lien of liens"
                 :key="lien.url"
                 :to="lien.url"
@@ -63,6 +68,11 @@ export default defineComponent({
       {
         nom: 'Exercice 2',
         url: '/ex2',
+        icone: 'fastfood'
+      },
+      {
+        nom: 'Exercice 3',
+        url: '/ex3',
         icone: 'fastfood'
       }]
     }
