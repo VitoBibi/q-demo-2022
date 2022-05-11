@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Vito Bibione première application
+          Application tirage au sort
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -63,7 +63,7 @@ export default defineComponent({
       liens: [{
         nom: 'Exercice 1',
         url: '/ex1',
-        icone: 'euro_symbol'
+        icone: 'person'
       },
       {
         nom: 'Exercice 2',

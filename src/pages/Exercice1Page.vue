@@ -117,6 +117,13 @@ export default defineComponent({
   },
   mounted () {
     this.randomName()
+  },
+  directives: {
+    autofocus: {
+      mounted (element) {
+        element.focus()
+      }
+    }
   }
 })
 
